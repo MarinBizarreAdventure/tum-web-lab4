@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <img src="assets/icon.png" alt="CashAppreciated logo" class="logo-img">
+            <span class="logo-text">CashAppreciated</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#why-donate">Why Donate</a></li>
+            <li><a href="#donation-options">Donation Options</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+        <div class="mobile-menu-btn" id="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+        </div>
+    </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay (mobile-only element) -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-close" id="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <ul class="mobile-nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#why-donate">Why Donate</a></li>
+                <li><a href="#donation-options">Donation Options</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+            <!-- Mobile-only element: Quick donate buttons -->
+            <div class="mobile-quick-donate">
+                <h3>Quick Donate</h3>
+                <div class="mobile-donate-buttons">
+                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-mobile-donate">$3</a>
+                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-mobile-donate">$5</a>
+                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-mobile-donate">$10</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <sectiion id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>CashAppreciated</h1>
+                <p class="tagline">Because Everyone needs a laugh and I need coffee</p>
+                <div class ="cta-buttons">
+                    <a href = "#donation-options" class = "btn btn-primary">Donate Now</a>
+                    <a href = "#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets\appreciate_image.png" alt="Money appreciation Illustration">
+            </div> 
+        </div>
+    </sectiion>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container"> 
+            <h2 class="section-title">About This Site</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to CashAppreciated - the most honest donation site on the internet! This is a joke site, but the donations are very real (and very appreciated).</p>
+                    <p>Here's the deal: I'm a student working on a web development project, and I thought "why not make something fun that could also buy me a coffee?"</p>
+                    <p>No grand causes, no sob stories - just pure honesty and humor. Your donation will directly fuel my caffeine addiction and possibly some late-night coding snacks.</p>
+                </div>
+                <div class="about-image">
+                    <img src="assets\coffe_and_coding.png" alt="Coffee and coding">
+                </div>  
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Donate Section -->
+    <section id="why-donate" class="why-donate">
+        <div class="container">
+            <h2 class="section-title">Hilarious reasons to Donate</h2>
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-coffee"></i></div>
+                <h3>Caffeine Enabler</h3>
+                <p>Your donationn directly contributes to keeping a developer caffeinated. Think of it as a fuel for fututer innovations.. or at least future assignments.</p>
+            
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-laugh-beam"></i></div>
+                <h3>Instant Good Karma</h3>
+                <p>Scientists* have proven that donating to this site increase your luck by 37% for at least 24 hours.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-trophy"></i></div>
+                <h3>Bragging Rights</h3>
+                <p>You can tell your friends you-re "supporting indie web development" and sound incredibly sophisticated and generous.</p>
+            </div>
+            <div class="reason-card">
+                <div class="reason-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                <h3>Tax benefits</h3>
+                <p>Nope whatsoever! But you do get my eternal gratitude, which is almost as good as a tax write-off, right?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Only Section: Quick Tips -->
+    <section class="mobile-only-section">
+        <div class="container">
+            <h2 class="section-title">Quick Donation Tips</h2>
+            <div class="mobile-tips">
+                <div class="mobile-tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <p>Tap the floating duck for a donation shortcut!</p>
+                </div>
+                <div class="mobile-tip">
+                    <i class="fas fa-mobile-alt"></i>
+                    <p>Save this page to your home screen for easy access.</p>
+                </div>
+                <div class="mobile-tip">
+                    <i class="fas fa-share-alt"></i>
+                    <p>Share with friends to spread the joy (and feed a hungry developer).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Options Section -->
+    <section id="donation-options" class="donation-options">
+        <div class="container">
+            <h2 class="section-title">Choose Your generosity Level</h2>
+            <div class="options-container">
+                <div class="option-card">
+                    <h3 class="option-title">Small Coffee</h3>
+                    <div class="option-amount">$3</div>
+                    <ul class="option-features">
+                        <li>Keeps me awake for 2 hours</li>
+                        <li>My gratitude level: Appreciative</li>
+                        <li>Earns you a virtual high-five</li>
+                    </ul>
+                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-option">Donate $3</a>
+                </div>
+                <div class="option-card featured">
+                    <div class = "featured-tag">Most Popular</div>
+                    <h3 class="option-title">Large Coffee & Snack</h3>
+                    <div class="option-amount">$5</div>
+                    <ul class="option-features">
+                        <li>fuels an entire evening of coding</li>
+                        <li>My gratitude level: Extremely Thankful</li>
+                        <li>Earns you a virtual hug</li>
+                    </ul>
+                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-option">Donate $5</a>
+                </div>
+                <div class="option-card">
+                    <h3 class="option-title">The Feast</h3>
+                    <div class="option-amount">$10</div>
+                    <ul class="option-features">
+                        <li>Coffee, snacks, and an actual meal</li>
+                        <li>My gratitude level: Eternally Devoted</li>
+                        <li>I'll tell my mom about your generosity</li>
+                    </ul>
+                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-option">Donate $10</a>
+                </div>
+            </div>
+
+            <!-- Buy Me A Coffee Widget -->
+            <div class="buy-me-coffee">
+                <h3>Prefer an Official button?</h3>
+                <p>Use Buy Me A Coffee widget instead:</p>
+                <a href="https://www.buymeacoffee.com/marinnegai"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=marinnegai&button_colour=6e50ce&font_colour=ffffff&font_family=Poppins&outline_colour=ffffff&coffee_colour=FFDD00" /></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What "People" Are Saying</h2>
+            <p class="section-subtitle">(100% made up testimonials from imaginary donors)</p>
+            <div class="testimonial-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I donated $3 and the next day I found $5 in my wallet. That's a 66% ROI! Best investment ever."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">Sarah J.</div>
+                        <div class="author-title">Professional Money launder</div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>I wasn't sure about donating, but then I thought 'What would I spend this $5 on anyway? Another forgettable coffee?' At least this way I made someone's day better."</p></p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">Tony S.</div>
+                        <div class="author-title">Genius, billionaire, playboy, philanthropist</div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Donating to this site made me 10% more attractive. I can't explain it scientifically, but it's true."</p></p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-name">Alex T.</div>
+                        <div class="author-title">Self-Proclaimed Attractiveness Expert</div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </section>
+
+    <!--Footer-->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                <img src="assets/icon.png" alt="CashAppreciated logo" class="footer-logo-img">
+                <span>CashAppreciated</span>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#why-donate">Why Donate</a></li>
+                        <li><a href="#donation-options">Donation Options</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p>This is a student project by Negai Marin</p>
+                    <p>Email: negaimarin@gmail.com</p>
+                    <div class="social-links">
+                        <a href="https://github.com/MarinBizarreAdventure"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/marinnegai"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CashAppreciated. This is a joke site for a university project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Money Duck Mascot SVG -->
+    <div class="mascot-container" id="mascot-container">
+        <div class="mascot-message" id="mascot-message">
+            <p>Quack! Wanna donate? I'll keep your money safe!</p>
+            <a href="#donation-options" class="mascot-btn">Donate Now</a>
+        </div>
+        <svg class="money-duck-mascot" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Duck Body -->
+            <ellipse cx="100" cy="120" rx="70" ry="60" fill="#FFEB3B" class="duck-body" />
+            <!-- Duck Wing -->
+            <ellipse cx="80" cy="100" rx="40" ry="35" fill="#FFD600" class="duck-wing" />
+
+            <!-- Duck Legs -->
+            <path d="M70 170 L70 190 L85 190 L80 170" fill="#FF9800" class="duck-leg left-leg" />
+            <path d="M100 170 L100 190 L115 190 L110 170" fill="#FF9800" class="duck-leg right-leg" />
+            
+            <!-- Money Sign on Duck's Body -->
+            <text x="85" y="130" font-family="Arial" font-size="40" fill="#4CAF50" font-weight="bold">$</text>
+            <!-- Duck Head Group -->
+            <g class="duck-head">
+                <!-- Head Circle -->
+                <circle cx="150" cy="80" r="40" fill="#FFEB3B" />
+                <!-- Duck Eye -->
+                <circle cx="165" cy="70" r="8" fill="white" />
+                <circle cx="168" cy="67" r="4" fill="black" />
+                <!-- Duck Bill -->
+                <path d="M190 85 C210 90, 210 100, 190 105 L175 95 Z" fill="#FF9800" class="duck-bill" />
+            </g>
+        </svg>
+    </div>
+
+    <!-- Buy Me a Coffee Widget Script -->
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="marinnegai" data-description="Support me on Buy me a coffee!" data-message="" data-color="#BD5FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+    <!-- JavaScript for Mobile Menu and Mascot Interaction -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+        }
+        
+        mobileMenuClose.addEventListener('click', closeMenu);
+        
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Mascot Interaction
+        const mascotContainer = document.getElementById('mascot-container');
+        const mascotMessage = document.getElementById('mascot-message');
+        
+        // Show mascot after delay
+        setTimeout(() => {
+            mascotContainer.classList.add('visible');
+        }, 2000);
+        
+        // Toggle message on hover/tap
+        mascotContainer.addEventListener('mouseenter', () => {
+            mascotMessage.classList.add('visible');
+        });
+        
+        mascotContainer.addEventListener('mouseleave', () => {
+            mascotMessage.classList.remove('visible');
+        });
+        
+        // For mobile (touch) - toggle on click
+        mascotContainer.addEventListener('click', () => {
+            mascotMessage.classList.toggle('visible');
+        });
+    </script>
+
+</body>
+
+</html>
