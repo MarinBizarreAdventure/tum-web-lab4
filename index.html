@@ -4,137 +4,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="reset.css">
     <link rel="icon" type="image/png" href="assets/icon.png">
-    <link rel="stylesheet" href="styles.css">
+    <!-- Include Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind with our custom colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B5CF6',
+                        'primary-hover': '#7c4df3',
+                        secondary: '#10B981',
+                        accent: '#FBBF24',
+                        dark: '#1F2937',
+                        light: '#F3F4F6',
+                        'text-color': '#4B5563',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        headBob: {
+                            '0%': { transform: 'rotate(-2deg) translateY(0)' },
+                            '25%': { transform: 'rotate(0deg) translateY(-2px)' },
+                            '50%': { transform: 'rotate(2deg) translateY(0)' },
+                            '75%': { transform: 'rotate(0deg) translateY(2px)' },
+                            '100%': { transform: 'rotate(-2deg) translateY(0)' },
+                        },
+                        wingFlap: {
+                            '0%, 100%': { transform: 'rotate(0deg) scaleY(1)' },
+                            '50%': { transform: 'rotate(-2deg) scaleY(0.97)' },
+                        }
+                    },
+                    animation: {
+                        float: 'float 4s ease-in-out infinite',
+                        headBob: 'headBob 3s ease-in-out infinite',
+                        wingFlap: 'wingFlap 2s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom styles that can't be easily replaced with Tailwind -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Money Duck Mascot Animations */
+        .duck-body {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .duck-head {
+            animation: headBob 3s ease-in-out infinite;
+            transform-origin: center bottom;
+        }
+
+        .duck-wing {
+            animation: wingFlap 2s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .mascot-container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .mascot-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mascot-message {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+
+        .mascot-message.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .mobile-menu-overlay {
+            left: -100%;
+            transition: all 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            left: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes headBob {
+            0% { transform: rotate(-2deg) translateY(0); }
+            25% { transform: rotate(0deg) translateY(-2px); }
+            50% { transform: rotate(2deg) translateY(0); }
+            75% { transform: rotate(0deg) translateY(2px); }
+            100% { transform: rotate(-2deg) translateY(0); }
+        }
+
+        @keyframes wingFlap {
+            0%, 100% { transform: rotate(0deg) scaleY(1); }
+            50% { transform: rotate(-2deg) scaleY(0.97); }
+        }
+    </style>
 </head>
 
-<body>
+<body class="text-gray-600 leading-relaxed">
     <!-- Navigation -->
-    <nav class="navbar">
-    <div class="container">
-        <div class="logo">
-            <img src="assets/icon.png" alt="CashAppreciated logo" class="logo-img">
-            <span class="logo-text">CashAppreciated</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#why-donate">Why Donate</a></li>
-            <li><a href="#donation-options">Donation Options</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-        </ul>
-        <div class="mobile-menu-btn" id="mobile-menu-toggle">
+    <nav class="fixed top-0 left-0 w-full bg-white shadow-md z-50 h-[70px]">
+        <div class="container mx-auto px-5 flex justify-between items-center h-full max-w-7xl">
+            <div class="flex items-center">
+                <img src="assets/icon.png" alt="CashAppreciated logo" class="h-10 w-auto mr-3">
+                <span class="text-primary text-2xl font-bold">CashAppreciated</span>
+            </div>
+            <ul class="hidden md:flex items-center h-full">
+                <li class="mx-4 h-full flex items-center"><a href="#home" class="text-dark font-medium hover:text-primary transition-colors duration-300">Home</a></li>
+                <li class="mx-4 h-full flex items-center"><a href="#about" class="text-dark font-medium hover:text-primary transition-colors duration-300">About</a></li>
+                <li class="mx-4 h-full flex items-center"><a href="#why-donate" class="text-dark font-medium hover:text-primary transition-colors duration-300">Why Donate</a></li>
+                <li class="mx-4 h-full flex items-center"><a href="#donation-options" class="text-dark font-medium hover:text-primary transition-colors duration-300">Donation Options</a></li>
+                <li class="mx-4 h-full flex items-center"><a href="#testimonials" class="text-dark font-medium hover:text-primary transition-colors duration-300">Testimonials</a></li>
+            </ul>
+            <div id="mobile-menu-toggle" class="md:hidden text-2xl cursor-pointer text-dark hover:text-primary transition-colors duration-300">
                 <i class="fas fa-bars"></i>
+            </div>
         </div>
-    </div>
     </nav>
 
     <!-- Mobile Menu Overlay (mobile-only element) -->
-    <div class="mobile-menu-overlay" id="mobile-menu">
-        <div class="mobile-menu-content">
-            <div class="mobile-menu-close" id="mobile-menu-close">
+    <div id="mobile-menu" class="mobile-menu-overlay fixed top-0 w-full h-screen bg-white z-[1100] flex items-center justify-center">
+        <div class="w-[90%] max-w-md relative">
+            <div id="mobile-menu-close" class="absolute -top-10 right-0 text-3xl cursor-pointer text-dark hover:text-primary transition-all duration-300 hover:rotate-90">
                 <i class="fas fa-times"></i>
             </div>
             <ul class="mobile-nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#why-donate">Why Donate</a></li>
-                <li><a href="#donation-options">Donation Options</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
+                <li class="mb-5"><a href="#home" class="text-dark text-2xl font-semibold block py-3 hover:text-primary hover:translate-x-3 transition-all duration-300">Home</a></li>
+                <li class="mb-5"><a href="#about" class="text-dark text-2xl font-semibold block py-3 hover:text-primary hover:translate-x-3 transition-all duration-300">About</a></li>
+                <li class="mb-5"><a href="#why-donate" class="text-dark text-2xl font-semibold block py-3 hover:text-primary hover:translate-x-3 transition-all duration-300">Why Donate</a></li>
+                <li class="mb-5"><a href="#donation-options" class="text-dark text-2xl font-semibold block py-3 hover:text-primary hover:translate-x-3 transition-all duration-300">Donation Options</a></li>
+                <li class="mb-5"><a href="#testimonials" class="text-dark text-2xl font-semibold block py-3 hover:text-primary hover:translate-x-3 transition-all duration-300">Testimonials</a></li>
             </ul>
             <!-- Mobile-only element: Quick donate buttons -->
-            <div class="mobile-quick-donate">
-                <h3>Quick Donate</h3>
-                <div class="mobile-donate-buttons">
-                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-mobile-donate">$3</a>
-                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-mobile-donate">$5</a>
-                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-mobile-donate">$10</a>
+            <div class="mt-10 p-5 bg-gray-50 rounded-lg block md:hidden">
+                <h3 class="text-xl font-semibold mb-5 text-dark text-center">Quick Donate</h3>
+                <div class="flex justify-between gap-3">
+                    <a href="https://buymeacoffee.com/marinnegai" class="flex-1 bg-primary text-white text-xl font-semibold text-center py-3 px-2 rounded-full hover:bg-primary-hover hover:-translate-y-1 transition-all duration-300">$3</a>
+                    <a href="https://buymeacoffee.com/marinnegai" class="flex-1 bg-primary text-white text-xl font-semibold text-center py-3 px-2 rounded-full hover:bg-primary-hover hover:-translate-y-1 transition-all duration-300">$5</a>
+                    <a href="https://buymeacoffee.com/marinnegai" class="flex-1 bg-primary text-white text-xl font-semibold text-center py-3 px-2 rounded-full hover:bg-primary-hover hover:-translate-y-1 transition-all duration-300">$10</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <sectiion id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>CashAppreciated</h1>
-                <p class="tagline">Because Everyone needs a laugh and I need coffee</p>
-                <div class ="cta-buttons">
-                    <a href = "#donation-options" class = "btn btn-primary">Donate Now</a>
-                    <a href = "#about" class="btn btn-secondary">Learn More</a>
+    <!-- Hero Section - TAILWIND MODIFIED SECTION -->
+    <section id="home" class="pt-32 pb-16 bg-gradient-to-br from-gray-50 to-gray-200">
+        <div class="container mx-auto px-5 max-w-7xl">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="w-full md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-bold text-dark mb-5">CashAppreciated</h1>
+                    <p class="text-lg text-gray-600 mb-10">Because Everyone needs a laugh and I need coffee</p>
+                    <div class="flex flex-col sm:flex-row gap-5 justify-center md:justify-start">
+                        <a href="#donation-options" class="bg-primary text-white font-medium py-3 px-7 rounded-full hover:bg-primary-hover hover:-translate-y-1 hover:shadow-lg transition-all duration-300">Donate Now</a>
+                        <a href="#about" class="bg-white text-primary font-medium py-3 px-7 rounded-full border-2 border-primary hover:bg-primary hover:text-white hover:-translate-y-1 hover:shadow-lg transition-all duration-300">Learn More</a>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-image">
-                <img src="assets\appreciate_image.png" alt="Money appreciation Illustration">
-            </div> 
-        </div>
-    </sectiion>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container"> 
-            <h2 class="section-title">About This Site</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Welcome to CashAppreciated - the most honest donation site on the internet! This is a joke site, but the donations are very real (and very appreciated).</p>
-                    <p>Here's the deal: I'm a student working on a web development project, and I thought "why not make something fun that could also buy me a coffee?"</p>
-                    <p>No grand causes, no sob stories - just pure honesty and humor. Your donation will directly fuel my caffeine addiction and possibly some late-night coding snacks.</p>
+                <div class="w-full md:w-5/12">
+                    <img src="assets/appreciate_image.png" alt="Money appreciation Illustration" class="w-full h-auto rounded-lg shadow-xl">
                 </div>
-                <div class="about-image">
-                    <img src="assets\coffe_and_coding.png" alt="Coffee and coding">
-                </div>  
             </div>
         </div>
     </section>
 
-    <!-- Why Donate Section -->
-    <section id="why-donate" class="why-donate">
-        <div class="container">
-            <h2 class="section-title">Hilarious reasons to Donate</h2>
-            <div class="reason-card">
-                <div class="reason-icon"><i class="fas fa-coffee"></i></div>
-                <h3>Caffeine Enabler</h3>
-                <p>Your donationn directly contributes to keeping a developer caffeinated. Think of it as a fuel for fututer innovations.. or at least future assignments.</p>
-            
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-5 max-w-7xl">
+            <h2 class="text-4xl font-bold text-center text-dark mb-12">About This Site</h2>
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="w-full md:w-1/2 mb-10 md:mb-0">
+                    <p class="text-lg mb-5">Welcome to CashAppreciated - the most honest donation site on the internet! This is a joke site, but the donations are very real (and very appreciated).</p>
+                    <p class="text-lg mb-5">Here's the deal: I'm a student working on a web development project, and I thought "why not make something fun that could also buy me a coffee?"</p>
+                    <p class="text-lg">No grand causes, no sob stories - just pure honesty and humor. Your donation will directly fuel my caffeine addiction and possibly some late-night coding snacks.</p>
+                </div>
+                <div class="w-full md:w-5/12">
+                    <img src="assets/coffe_and_coding.png" alt="Coffee and coding" class="w-full h-auto rounded-lg shadow-xl">
+                </div>
             </div>
-            <div class="reason-card">
-                <div class="reason-icon"><i class="fas fa-laugh-beam"></i></div>
-                <h3>Instant Good Karma</h3>
-                <p>Scientists* have proven that donating to this site increase your luck by 37% for at least 24 hours.</p>
-            </div>
-            <div class="reason-card">
-                <div class="reason-icon"><i class="fas fa-trophy"></i></div>
-                <h3>Bragging Rights</h3>
-                <p>You can tell your friends you-re "supporting indie web development" and sound incredibly sophisticated and generous.</p>
-            </div>
-            <div class="reason-card">
-                <div class="reason-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                <h3>Tax benefits</h3>
-                <p>Nope whatsoever! But you do get my eternal gratitude, which is almost as good as a tax write-off, right?</p>
+        </div>
+    </section>
+
+    <!-- Why Donate Section - TAILWIND MODIFIED SECTION -->
+    <section id="why-donate" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-5 max-w-7xl">
+            <h2 class="text-4xl font-bold text-center text-dark mb-12">Hilarious Reasons to Donate</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-8 rounded-xl shadow-md hover:-translate-y-3 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-primary mb-5"><i class="fas fa-coffee"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-dark">Caffeine Enabler</h3>
+                    <p>Your donation directly contributes to keeping a developer caffeinated. Think of it as fuel for future innovations... or at least future assignments.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md hover:-translate-y-3 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-primary mb-5"><i class="fas fa-laugh-beam"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-dark">Instant Good Karma</h3>
+                    <p>Scientists* have proven that donating to this site increases your luck by 37% for at least 24 hours.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md hover:-translate-y-3 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-primary mb-5"><i class="fas fa-trophy"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-dark">Bragging Rights</h3>
+                    <p>You can tell your friends you're "supporting indie web development" and sound incredibly sophisticated and generous.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-md hover:-translate-y-3 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-primary mb-5"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-dark">Tax Benefits</h3>
+                    <p>None whatsoever! But you do get my eternal gratitude, which is almost as good as a tax write-off, right?</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Mobile Only Section: Quick Tips -->
-    <section class="mobile-only-section">
-        <div class="container">
-            <h2 class="section-title">Quick Donation Tips</h2>
-            <div class="mobile-tips">
-                <div class="mobile-tip">
-                    <i class="fas fa-lightbulb"></i>
+    <section class="py-12 bg-indigo-50 block md:hidden">
+        <div class="container mx-auto px-5 max-w-7xl">
+            <h2 class="text-3xl font-bold text-center text-dark mb-8">Quick Donation Tips</h2>
+            <div class="flex flex-col gap-5">
+                <div class="flex items-center bg-white p-5 rounded-lg shadow-md">
+                    <i class="fas fa-lightbulb text-3xl text-primary mr-5"></i>
                     <p>Tap the floating duck for a donation shortcut!</p>
                 </div>
-                <div class="mobile-tip">
-                    <i class="fas fa-mobile-alt"></i>
+                <div class="flex items-center bg-white p-5 rounded-lg shadow-md">
+                    <i class="fas fa-mobile-alt text-3xl text-primary mr-5"></i>
                     <p>Save this page to your home screen for easy access.</p>
                 </div>
-                <div class="mobile-tip">
-                    <i class="fas fa-share-alt"></i>
+                <div class="flex items-center bg-white p-5 rounded-lg shadow-md">
+                    <i class="fas fa-share-alt text-3xl text-primary mr-5"></i>
                     <p>Share with friends to spread the joy (and feed a hungry developer).</p>
                 </div>
             </div>
@@ -142,130 +258,137 @@
     </section>
 
     <!-- Donation Options Section -->
-    <section id="donation-options" class="donation-options">
-        <div class="container">
-            <h2 class="section-title">Choose Your generosity Level</h2>
-            <div class="options-container">
-                <div class="option-card">
-                    <h3 class="option-title">Small Coffee</h3>
-                    <div class="option-amount">$3</div>
-                    <ul class="option-features">
-                        <li>Keeps me awake for 2 hours</li>
-                        <li>My gratitude level: Appreciative</li>
-                        <li>Earns you a virtual high-five</li>
+    <section id="donation-options" class="py-20 bg-white">
+        <div class="container mx-auto px-5 max-w-7xl">
+            <h2 class="text-4xl font-bold text-center text-dark mb-12">Choose Your Generosity Level</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 text-center relative hover:-translate-y-3 hover:shadow-xl transition-all duration-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-dark">Small Coffee</h3>
+                    <div class="text-4xl font-bold text-primary mb-6">$3</div>
+                    <ul class="text-left mb-8">
+                        <li class="mb-3 pl-7 relative before:content-['\2713'] before:absolute before:left-0 before:text-secondary before:font-bold">Keeps me awake for 2 hours</li>
+                        <li class="mb-3 pl-7 relative before:content-['\2713'] before:absolute before:left-0 before:text-secondary before:font-bold">My gratitude level: Appreciative</li>
+                        <li class="mb-3 pl-7 relative before:content-['\2713'] before:absolute before:left-0 before:text-secondary before:font-bold">Earns you a virtual high-five</li>
                     </ul>
-                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-option">Donate $3</a>
+                    <a href="https://buymeacoffee.com/marinnegai" class="block w-full bg-primary text-white font-medium py-3 px-6 rounded-full hover:bg-primary-hover transition-colors duration-300">Donate $3</a>
                 </div>
-                <div class="option-card featured">
-                    <div class = "featured-tag">Most Popular</div>
-                    <h3 class="option-title">Large Coffee & Snack</h3>
-                    <div class="option-amount">$5</div>
-                    <ul class="option-features">
-                        <li>fuels an entire evening of coding</li>
-                        <li>My gratitude level: Extremely Thankful</li>
-                        <li>Earns you a virtual hug</li>
+                <div class="bg-white p-8 rounded-xl shadow-lg border-2 border-primary text-center relative hover:-translate-y-3 hover:shadow-xl transition-all duration-300 scale-105 z-10">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-semibold">Most Popular</div>
+                    <h3 class="text-2xl font-semibold mb-4 text-dark">Large Coffee & Snack</h3>
+                    <div class="text-4xl font-bold text-primary mb-6">$5</div>
+                    <ul class="text-left mb-8">
+                        <li class="mb-3 pl-7 relative before:content-['\2713'] before:absolute before:left-0 before:text-secondary before:font-bold">Fuels an entire evening of coding</li>
+                        <li class="mb-3 pl-7 relative before:content-['\2713'] before:absolute before:left-0 before:text-secondary before:font-bold">My gratitude level: Extremely Thankful</li>
+                        <li class="mb-3 pl-7 relative before:content-['\2713'] before:absolute before:left-0 before:text-secondary before:font-bold">Earns you a virtual hug</li>
                     </ul>
-                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-option">Donate $5</a>
+                    <a href="https://buymeacoffee.com/marinnegai" class="block w-full bg-primary text-white font-medium py-3 px-6 rounded-full hover:bg-primary-hover transition-colors duration-300">Donate $5</a>
                 </div>
-                <div class="option-card">
-                    <h3 class="option-title">The Feast</h3>
-                    <div class="option-amount">$10</div>
-                    <ul class="option-features">
-                        <li>Coffee, snacks, and an actual meal</li>
-                        <li>My gratitude level: Eternally Devoted</li>
-                        <li>I'll tell my mom about your generosity</li>
+                <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 text-center relative hover:-translate-y-3 hover:shadow-xl transition-all duration-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-dark">The Feast</h3>
+                    <div class="text-4xl font-bold text-primary mb-6">$10</div>
+                    <ul class="text-left mb-8">
+                        <li class="mb-3 pl-7 relative before:content-['\2713'] before:absolute before:left-0 before:text-secondary before:font-bold">Coffee, snacks, and an actual meal</li>
+                        <li class="mb-3 pl-7 relative before:content-['\2713'] before:absolute before:left-0 before:text-secondary before:font-bold">My gratitude level: Eternally Devoted</li>
+                        <li class="mb-3 pl-7 relative before:content-['\2713'] before:absolute before:left-0 before:text-secondary before:font-bold">I'll tell my mom about your generosity</li>
                     </ul>
-                    <a href="https://buymeacoffee.com/marinnegai" class="btn btn-option">Donate $10</a>
+                    <a href="https://buymeacoffee.com/marinnegai" class="block w-full bg-primary text-white font-medium py-3 px-6 rounded-full hover:bg-primary-hover transition-colors duration-300">Donate $10</a>
                 </div>
             </div>
 
             <!-- Buy Me A Coffee Widget -->
-            <div class="buy-me-coffee">
-                <h3>Prefer an Official button?</h3>
-                <p>Use Buy Me A Coffee widget instead:</p>
+            <div class="text-center bg-gray-50 p-8 rounded-xl">
+                <h3 class="text-2xl font-semibold mb-3 text-dark">Prefer an Official button?</h3>
+                <p class="mb-5">Use Buy Me A Coffee widget instead:</p>
                 <a href="https://www.buymeacoffee.com/marinnegai"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=marinnegai&button_colour=6e50ce&font_colour=ffffff&font_family=Poppins&outline_colour=ffffff&coffee_colour=FFDD00" /></a>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2 class="section-title">What "People" Are Saying</h2>
-            <p class="section-subtitle">(100% made up testimonials from imaginary donors)</p>
-            <div class="testimonial-container">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
+    <section id="testimonials" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-5 max-w-7xl">
+            <h2 class="text-4xl font-bold text-center text-dark mb-3">What "People" Are Saying</h2>
+            <p class="text-center italic text-gray-500 mb-12">(100% made up testimonials from imaginary donors)</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="relative py-5">
                         <p>"I donated $3 and the next day I found $5 in my wallet. That's a 66% ROI! Best investment ever."</p>
                     </div>
-                    <div class="testimonial-author">
-                        <div class="author-name">Sarah J.</div>
-                        <div class="author-title">Professional Money launder</div>
+                    <div class="mt-5">
+                        <div class="font-semibold text-dark">Sarah J.</div>
+                        <div class="text-sm text-gray-500">Professional Money Launderer</div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>I wasn't sure about donating, but then I thought 'What would I spend this $5 on anyway? Another forgettable coffee?' At least this way I made someone's day better."</p></p>
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="relative py-5">
+                        <p>I wasn't sure about donating, but then I thought 'What would I spend this $5 on anyway? Another forgettable coffee?' At least this way I made someone's day better."</p>
                     </div>
-                    <div class="testimonial-author">
-                        <div class="author-name">Tony S.</div>
-                        <div class="author-title">Genius, billionaire, playboy, philanthropist</div>
+                    <div class="mt-5">
+                        <div class="font-semibold text-dark">Tony S.</div>
+                        <div class="text-sm text-gray-500">Genius, Billionaire, Playboy, Philanthropist</div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"Donating to this site made me 10% more attractive. I can't explain it scientifically, but it's true."</p></p>
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <div class="relative py-5">
+                        <p>"Donating to this site made me 10% more attractive. I can't explain it scientifically, but it's true."</p>
                     </div>
-                    <div class="testimonial-author">
-                        <div class="author-name">Alex T.</div>
-                        <div class="author-title">Self-Proclaimed Attractiveness Expert</div>
+                    <div class="mt-5">
+                        <div class="font-semibold text-dark">Alex T.</div>
+                        <div class="text-sm text-gray-500">Self-Proclaimed Attractiveness Expert</div>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </section>
 
-    <!--Footer-->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                <img src="assets/icon.png" alt="CashAppreciated logo" class="footer-logo-img">
-                <span>CashAppreciated</span>
+    <!-- Footer -->
+    <footer class="bg-dark text-gray-300 pt-16">
+        <div class="container mx-auto px-5 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+                <div>
+                    <div class="flex items-center mb-5">
+                        <img src="assets/icon.png" alt="CashAppreciated logo" class="h-10 w-auto mr-3 brightness-0 invert">
+                        <span class="text-2xl font-bold text-white">CashAppreciated</span>
+                    </div>
                 </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
+                <div>
+                    <h3 class="text-xl font-semibold mb-5 text-white">Quick Links</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#why-donate">Why Donate</a></li>
-                        <li><a href="#donation-options">Donation Options</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li class="mb-3"><a href="#home" class="text-gray-300 hover:text-primary transition-colors duration-300">Home</a></li>
+                        <li class="mb-3"><a href="#about" class="text-gray-300 hover:text-primary transition-colors duration-300">About</a></li>
+                        <li class="mb-3"><a href="#why-donate" class="text-gray-300 hover:text-primary transition-colors duration-300">Why Donate</a></li>
+                        <li class="mb-3"><a href="#donation-options" class="text-gray-300 hover:text-primary transition-colors duration-300">Donation Options</a></li>
+                        <li class="mb-3"><a href="#testimonials" class="text-gray-300 hover:text-primary transition-colors duration-300">Testimonials</a></li>
                     </ul>
                 </div>
-                <div class="footer-contact">
-                    <h3>Contact</h3>
-                    <p>This is a student project by Negai Marin</p>
-                    <p>Email: negaimarin@gmail.com</p>
-                    <div class="social-links">
-                        <a href="https://github.com/MarinBizarreAdventure"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/marinnegai"><i class="fab fa-linkedin"></i></a>
+                <div>
+                    <h3 class="text-xl font-semibold mb-5 text-white">Contact</h3>
+                    <p class="mb-3">This is a student project by Negai Marin</p>
+                    <p class="mb-3">Email: negaimarin@gmail.com</p>
+                    <div class="flex gap-4 mt-5">
+                        <a href="https://github.com/MarinBizarreAdventure" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-github text-white"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/marinnegai" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary hover:-translate-y-1 transition-all duration-300">
+                            <i class="fab fa-linkedin text-white"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="text-center py-6 border-t border-gray-700">
                 <p>&copy; 2025 CashAppreciated. This is a joke site for a university project.</p>
             </div>
         </div>
     </footer>
 
     <!-- Money Duck Mascot SVG -->
-    <div class="mascot-container" id="mascot-container">
-        <div class="mascot-message" id="mascot-message">
-            <p>Quack! Wanna donate? I'll keep your money safe!</p>
-            <a href="#donation-options" class="mascot-btn">Donate Now</a>
+    <div class="mascot-container fixed bottom-8 left-8 z-40 cursor-pointer" id="mascot-container">
+        <div class="mascot-message absolute bottom-full left-0 bg-white p-4 rounded-lg shadow-md w-48 mb-3" id="mascot-message">
+            <p class="text-sm text-gray-700 mb-2">Quack! Wanna donate? I'll keep your money safe!</p>
+            <a href="#donation-options" class="block text-center bg-primary text-white text-sm py-1 px-3 rounded-full hover:bg-primary-hover hover:-translate-y-1 transition-all duration-300">Donate Now</a>
+            <div class="absolute bottom-[-10px] left-5 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-white"></div>
         </div>
-        <svg class="money-duck-mascot" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <svg class="money-duck-mascot w-36 h-28 filter drop-shadow-lg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <!-- Duck Body -->
             <ellipse cx="100" cy="120" rx="70" ry="60" fill="#FFEB3B" class="duck-body" />
             <!-- Duck Wing -->
@@ -291,9 +414,10 @@
     </div>
 
     <!-- Buy Me a Coffee Widget Script -->
-    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="marinnegai" data-description="Support me on Buy me a coffee!" data-message="" data-color="#BD5FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="marinnegai" data-description="Support me on Buy me a coffee!" data-message="" data-color="#BD5FFF" data-position="" data-x_margin="18" data-y_margin="18"></script>
 
-    <!-- JavaScript for Mobile Menu and Mascot Interaction -->
+
+    <!-- JavaScript for Mobile Menu and Mascot Interaction + Dark Mode -->
     <script>
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
@@ -337,8 +461,42 @@
         mascotContainer.addEventListener('click', () => {
             mascotMessage.classList.toggle('visible');
         });
-    </script>
 
+        // Dark Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved user preference and apply
+        if (localStorage.getItem('color-theme') === 'dark' || 
+            (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+        
+        // Toggle theme when button is clicked
+        themeToggleBtn.addEventListener('click', () => {
+            // Toggle icons
+            sunIcon.classList.toggle('hidden');
+            moonIcon.classList.toggle('hidden');
+            
+            // Toggle dark class
+            htmlElement.classList.toggle('dark');
+            
+            // Update localStorage
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                localStorage.setItem('color-theme', 'light');
+            }
+        });
+    </script>
 </body>
 
 </html>
